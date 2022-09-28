@@ -1,7 +1,25 @@
-// import { Link } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import UserContext from "../context/userContext";
+
 export default function Menu() {
+  const { setToken, setUserInfo, userInfo } = useContext(UserContext);
+  const [isLoged, setIsLoged] = useState(false);
+
+  useEffect(() => {
+    const infos = JSON.parse(localStorage.getItem("user"));
+    if (infos) {
+      setToken(infos.token);
+      setUserInfo({
+        userName: infos.userName,
+        image: infos.image,
+      });
+      setIsLoged(true);
+    }
+  }, []);
+
   return (
     <Container>
       <Box>
@@ -13,9 +31,17 @@ export default function Menu() {
       <Box>
         <p>Adicionar Receita</p>
       </Box>
-      <Box>
-        <p>Minha Conta</p>
-      </Box>
+      {isLoged ? (
+        <Box>
+          <p>Olá, {userInfo.userName}</p>
+        </Box>
+      ) : (
+        <Box>
+          <Link to="/login">
+            <p style={{ color: "#000" }}>Faça seu login!</p>
+          </Link>
+        </Box>
+      )}
     </Container>
   );
 }
@@ -32,6 +58,7 @@ const Box = styled.div`
   align-items: center;
   justify-content: center;
 
+  text-align: center;
   font-size: 25px;
   font-family: "Montserrat Alternates", sans-serif;
   color: #000;

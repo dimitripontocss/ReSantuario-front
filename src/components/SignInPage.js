@@ -3,10 +3,12 @@ import { useContext, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
+import UserContext from "../context/userContext";
+
 export default function SignInPage() {
   const navigate = useNavigate();
 
-  // const { setToken,setUsername } = useContext(UserContext);
+  const { setToken, setUserInfo } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(undefined);
@@ -23,8 +25,12 @@ export default function SignInPage() {
     );
     promise
       .then((response) => {
-        // setToken(response.data.token);
-        // setUsername(response.data.name);
+        setToken(response.data.token);
+        setUserInfo({
+          userName: response.data.userName,
+          image: response.data.image,
+        });
+        console.log(response.data);
         const user = JSON.stringify(response.data);
         localStorage.setItem("user", user);
         navigate("/");
@@ -72,6 +78,7 @@ const Container = styled.div`
   align-items: center;
 
   h3 {
+    text-align: center;
     font-family: "Montserrat Alternates", sans-serif;
     font-size: 34px;
     color: #000;
@@ -116,11 +123,15 @@ const Input = styled.input`
   border: none;
   padding: 10px;
 
+  font-family: "Montserrat Alternates", sans-serif;
+  color: #000;
+  font-size: 20px;
+
   ::placeholder {
     font-family: "Montserrat Alternates", sans-serif;
     color: grey;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 20px;
   }
 `;
 

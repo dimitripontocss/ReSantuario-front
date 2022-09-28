@@ -133,6 +133,10 @@ const Input = styled.input`
   border: none;
   padding: 10px;
 
+  font-family: "Montserrat Alternates", sans-serif;
+  color: #000;
+  font-size: 20px;
+
   ::placeholder {
     font-family: "Montserrat Alternates", sans-serif;
     color: grey;
