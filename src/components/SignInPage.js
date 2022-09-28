@@ -33,7 +33,7 @@ export default function SignInPage() {
         console.log(response.data);
         const user = JSON.stringify(response.data);
         localStorage.setItem("user", user);
-        navigate("/");
+        navigate(-1);
       })
       .catch((e) => {
         setError(e.response.data);
@@ -43,7 +43,7 @@ export default function SignInPage() {
   return (
     <Container>
       <Content>
-        <h3>Faça login e veja as interaja com os melhores chefs online!</h3>
+        <h3>Faça login e interaja com os melhores chefs da internet!</h3>
         <form onSubmit={login}>
           <Input
             placeholder="E-mail"
@@ -80,7 +80,7 @@ const Container = styled.div`
   h3 {
     text-align: center;
     font-family: "Montserrat Alternates", sans-serif;
-    font-size: 34px;
+    font-size: 32px;
     color: #000;
     text-shadow: 1px 1px 2px #f3e1b6;
   }

@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage";
 import Header from "./components/Header";
 import SignUpPage from "./components/SignUpPage";
 import SignInPage from "./components/SignInPage";
+import NewRecipePage from "./components/NewRecipe";
 
 import UserContext from "./context/userContext";
 
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/cadastro" element={<SignUpPage />} />
           <Route path="/login" element={<SignInPage />} />
+          <Route path="/nova-receita" element={<NewRecipePage />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
