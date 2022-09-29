@@ -15,10 +15,10 @@ export default function NewRecipePage() {
   const { token } = useContext(UserContext);
 
   const [title, setTitle] = useState("");
-  const [picture, setPicture] = useState("");
+  const [pictureUrl, setPictureUrl] = useState("");
   const [category, setCategory] = useState("");
   const [instructions, setInstructions] = useState("");
-  const [difficulty, setDifficulty] = useState("");
+  const [difficulty, setDifficulty] = useState(-1);
   const [newIngredient, setNewIngredient] = useState({ name: "", amount: "" });
   const [ingredients, setIngredients] = useState([]);
 
@@ -30,33 +30,50 @@ export default function NewRecipePage() {
   //       navigate("/login");
   //     }
   //   }, 2000);
+  function infoValidator() {
+    console.log(difficulty, ingredients);
+    if (difficulty === -1) {
+      setError("Selecione uma dificuldade.");
+      return false;
+    }
+    if (ingredients.length === 0) {
+      setError(
+        `Acho difícil uma receita sem nenhum ingrediente. Escolhe alguns aí.`
+      );
+      return false;
+    }
+    return true;
+  }
 
   function postRecipe(event) {
     event.preventDefault();
-    const body = {
-      title,
-      picture,
-      category,
-      instructions,
-      difficulty,
-      ingredients,
-    };
-    const promise = axios.post(
-      process.env.REACT_APP_LINK_BACKEND + "/recipe",
-      body,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    promise
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((e) => {
-        setError(e.response.data);
-      });
+    if (infoValidator()) {
+      const body = {
+        title,
+        pictureUrl,
+        category,
+        instructions,
+        difficulty,
+        ingredients,
+      };
+      const promise = axios.post(
+        process.env.REACT_APP_LINK_BACKEND + "/recipe",
+        body,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      promise
+        .then((response) => {
+          const addedRecipeId = response.data.addedRecipe.id;
+          navigate(`/receita/${addedRecipeId}`);
+        })
+        .catch((e) => {
+          setError(e.response.data);
+        });
+    }
   }
 
   function addIngredient() {
@@ -93,8 +110,8 @@ export default function NewRecipePage() {
                 placeholder=""
                 type="url"
                 required
-                value={picture}
-                onChange={(e) => setPicture(e.target.value)}
+                value={pictureUrl}
+                onChange={(e) => setPictureUrl(e.target.value)}
               ></Input>
               <p>Categoria:</p>
               <Input
@@ -244,6 +261,7 @@ const Content = styled.div`
   height: 72%;
   border-radius: 20px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  text-align: center;
   form {
     width: 100%;
     display: flex;
@@ -268,6 +286,8 @@ const Input = styled.input`
   font-family: "Montserrat Alternates", sans-serif;
   color: #000;
   font-size: 20px;
+
+  margin-top: 8px;
 
   ::placeholder {
     font-family: "Montserrat Alternates", sans-serif;
