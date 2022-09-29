@@ -19,6 +19,7 @@ export default function NewRecipePage() {
   const [category, setCategory] = useState("");
   const [instructions, setInstructions] = useState("");
   const [difficulty, setDifficulty] = useState("");
+  const [newIngredient, setNewIngredient] = useState({ name: "", amount: "" });
   const [ingredients, setIngredients] = useState([]);
 
   const [error, setError] = useState(undefined);
@@ -38,6 +39,7 @@ export default function NewRecipePage() {
       category,
       instructions,
       difficulty,
+      ingredients,
     };
     const promise = axios.post(
       process.env.REACT_APP_LINK_BACKEND + "/recipe",
@@ -57,69 +59,160 @@ export default function NewRecipePage() {
       });
   }
 
+  function addIngredient() {
+    console.log(ingredients);
+    if (newIngredient.name.length !== 0 && newIngredient.amount.length !== 0) {
+      if (isNaN(Number(newIngredient.amount))) return;
+      if (Number(newIngredient.amount) < 0) return;
+      setIngredients([...ingredients, newIngredient]);
+      setNewIngredient({
+        name: "",
+        amount: "",
+      });
+    }
+  }
+
   return (
     <>
       <Menu />
       <Container>
         <h3>Adicione sua receita. E espalhe sua invenção pela internet!</h3>
-        <Content>
-          <form onSubmit={postRecipe}>
-            <p>Título:</p>
-            <Input
-              placeholder=""
-              type="text"
-              required
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            ></Input>
-            <p>Url da foto:</p>
-            <Input
-              placeholder=""
-              type="url"
-              required
-              value={picture}
-              onChange={(e) => setPicture(e.target.value)}
-            ></Input>
-            <p>Categoria:</p>
-            <Input
-              placeholder=""
-              type="text"
-              required
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            ></Input>
-            <p>Modo de preparo:</p>
-            <Input
-              placeholder=""
-              type="text"
-              required
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
-            ></Input>
-            <p>Nível de dificuldade:</p>
-            <Rating
-              name="simple-controlled"
-              value={difficulty}
-              size="large"
-              onChange={(event, newValue) => {
-                setDifficulty(newValue);
-              }}
-            />
+        <Page>
+          <Content>
+            <form onSubmit={postRecipe}>
+              <p>Título:</p>
+              <Input
+                placeholder=""
+                type="text"
+                required
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              ></Input>
+              <p>Url da foto:</p>
+              <Input
+                placeholder=""
+                type="url"
+                required
+                value={picture}
+                onChange={(e) => setPicture(e.target.value)}
+              ></Input>
+              <p>Categoria:</p>
+              <Input
+                placeholder=""
+                type="text"
+                required
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              ></Input>
+              <p>Modo de preparo:</p>
+              <Input
+                placeholder=""
+                type="text"
+                required
+                value={instructions}
+                onChange={(e) => setInstructions(e.target.value)}
+              ></Input>
+              <p>Nível de dificuldade:</p>
+              <Rating
+                name="simple-controlled"
+                value={difficulty}
+                size="large"
+                onChange={(event, newValue) => {
+                  setDifficulty(newValue);
+                }}
+              />
 
-            {error ? <p>{error}</p> : <></>}
+              {error ? <p>{error}</p> : <></>}
 
-            <Button>Criar Receita</Button>
-          </form>
-        </Content>
+              <Button>Criar Receita</Button>
+            </form>
+          </Content>
+          <Content>
+            <Organizer>
+              <p>Adicionar Ingredientes:</p>
+              <AddIngredient>
+                <p>Qual o alimento?</p>
+                <input
+                  placeholder=""
+                  type="text"
+                  required
+                  value={newIngredient.name}
+                  onChange={(e) =>
+                    setNewIngredient({
+                      name: e.target.value,
+                      amount: newIngredient.amount,
+                    })
+                  }
+                ></input>
+                <p>Qual a quantidade? (gramas)</p>
+                <input
+                  placeholder=""
+                  type="text"
+                  required
+                  value={newIngredient.amount}
+                  onChange={(e) =>
+                    setNewIngredient({
+                      name: newIngredient.name,
+                      amount: e.target.value,
+                    })
+                  }
+                ></input>
+                <button onClick={addIngredient}>Adicionar Ingrediente</button>
+              </AddIngredient>
+            </Organizer>
+            <Organizer>
+              <p>Lista de Ingredientes:</p>
+              <AddedIngredients ingredients={ingredients} />
+            </Organizer>
+          </Content>
+        </Page>
       </Container>
     </>
   );
 }
 
+function AddedIngredients({ ingredients }) {
+  return (
+    <>
+      {ingredients.length === 0 ? (
+        <IngredientsBox>
+          <p>Não tem Ingredientes ainda. :(</p>
+        </IngredientsBox>
+      ) : (
+        <IngredientsBox>
+          <p>Precisamos de:</p>
+          {ingredients.map((ingredient, index) => {
+            return (
+              <p key={index}>
+                {ingredient.amount} gramas de {ingredient.name}
+              </p>
+            );
+          })}
+        </IngredientsBox>
+      )}
+    </>
+  );
+}
+
+const Organizer = styled.div`
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Page = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-  margin-top: 50px;
+  margin-top: 140px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -131,6 +224,7 @@ const Container = styled.div`
     font-size: 34px;
     color: #000;
     text-shadow: 1px 1px 2px #f3e1b6;
+    margin-bottom: 20px;
   }
   p {
     font-family: "Montserrat Alternates", sans-serif;
@@ -146,7 +240,7 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 80%;
+  width: 40%;
   height: 72%;
   border-radius: 20px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
@@ -195,14 +289,83 @@ const Button = styled.button`
   border: 2px solid #000;
   border-radius: 5px;
 
+  display: flex;
+  justify-content: center;
+
   font-family: "Montserrat Alternates", sans-serif;
   color: #000;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
 
   cursor: pointer;
   &:hover {
     transform: scale(1.05);
     transition: 0.3s linear;
+  }
+`;
+
+const AddIngredient = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+
+  p {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  input {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+
+    margin-top: 10px;
+
+    font-family: "Montserrat Alternates", sans-serif;
+    color: #000;
+    font-size: 16px;
+  }
+  button {
+    margin-top: 10px;
+    width: 40%;
+    background-color: #fa3419;
+
+    border: 2px solid #000;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+
+    font-family: "Montserrat Alternates", sans-serif;
+    color: #000;
+    font-weight: 700;
+    font-size: 10px;
+  }
+`;
+
+const IngredientsBox = styled.div`
+  width: 70%;
+  height: 70%;
+
+  margin-top: 15px;
+
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+
+  > p {
+    margin-top: 20px;
+    text-align: center;
+    font-family: "Montserrat Alternates", sans-serif;
+    color: #000;
+    font-size: 14px;
   }
 `;
