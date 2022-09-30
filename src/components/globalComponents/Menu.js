@@ -77,7 +77,10 @@ function PopUp({ isActive, setIsActive, refresh, setRefresh }) {
             height: "200%",
             display: "flex",
             flexDirection: "column",
+            justifyContent: "space-around",
             fontSize: "15px",
+            backgroundColor: "#fa3419",
+            fontWeight: "700",
           }}
         >
           <Link to="/usuario">
