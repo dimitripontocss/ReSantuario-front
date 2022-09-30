@@ -19,6 +19,7 @@ export default function NewRecipePage() {
   const [category, setCategory] = useState("");
   const [instructions, setInstructions] = useState("");
   const [difficulty, setDifficulty] = useState(-1);
+  const [portions, setPortions] = useState("");
   const [newIngredient, setNewIngredient] = useState({ name: "", amount: "" });
   const [ingredients, setIngredients] = useState([]);
 
@@ -55,6 +56,7 @@ export default function NewRecipePage() {
         instructions,
         difficulty,
         ingredients,
+        portions,
       };
       const promise = axios.post(
         process.env.REACT_APP_LINK_BACKEND + "/recipe",
@@ -77,7 +79,7 @@ export default function NewRecipePage() {
   }
 
   function addIngredient() {
-    console.log(ingredients);
+    console.log(typeof newIngredient.amount);
     if (newIngredient.name.length !== 0 && newIngredient.amount.length !== 0) {
       if (isNaN(Number(newIngredient.amount))) return;
       if (Number(newIngredient.amount) < 0) return;
@@ -129,6 +131,14 @@ export default function NewRecipePage() {
                 value={instructions}
                 onChange={(e) => setInstructions(e.target.value)}
               ></Input>
+              <p>Quantidade de porções:</p>
+              <Input
+                placeholder=""
+                type="number"
+                required
+                value={portions}
+                onChange={(e) => setPortions(e.target.value)}
+              ></Input>
               <p>Nível de dificuldade:</p>
               <Rating
                 name="simple-controlled"
@@ -164,7 +174,7 @@ export default function NewRecipePage() {
                 <p>Qual a quantidade? (gramas)</p>
                 <input
                   placeholder=""
-                  type="text"
+                  type="number"
                   required
                   value={newIngredient.amount}
                   onChange={(e) =>
@@ -277,7 +287,7 @@ const Content = styled.div`
 
 const Input = styled.input`
   width: 70%;
-  height: 50px;
+  height: 40px;
   margin-bottom: 10px;
   border-radius: 5px;
   border: none;
@@ -285,7 +295,7 @@ const Input = styled.input`
 
   font-family: "Montserrat Alternates", sans-serif;
   color: #000;
-  font-size: 20px;
+  font-size: 18px;
 
   margin-top: 8px;
 
