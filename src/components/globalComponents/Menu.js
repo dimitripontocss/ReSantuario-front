@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import UserContext from "../context/userContext";
+import UserContext from "../../context/userContext";
 
 export default function Menu() {
   const navigate = useNavigate();

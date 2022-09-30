@@ -2,12 +2,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import "./reset.css";
 
-import HomePage from "./components/HomePage";
-import Header from "./components/Header";
-import SignUpPage from "./components/SignUpPage";
-import SignInPage from "./components/SignInPage";
-import NewRecipePage from "./components/NewRecipe";
-import SingleRecipePage from "./components/SingleRecipePage";
+import HomePage from "./components/homePage/HomePage";
+import Header from "./components/globalComponents/Header";
+import SignUpPage from "./components/signUpPage/SignUpPage";
+import SignInPage from "./components/signInPage/SignInPage";
+import NewRecipePage from "./components/newRecipePage/NewRecipe";
+import SingleRecipePage from "./components/singleRecipePage/SingleRecipePage";
 
 import UserContext from "./context/userContext";
 

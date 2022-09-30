@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
-import userContext from "../context/userContext";
+import userContext from "../../context/userContext";
 
-import Menu from "./Menu";
+import Menu from "../globalComponents/Menu";
 
 export default function SingleRecipePage() {
   const { recipeId } = useParams();

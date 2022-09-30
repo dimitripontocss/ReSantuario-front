@@ -5,9 +5,9 @@ import axios from "axios";
 
 import Rating from "@mui/material/Rating";
 
-import Menu from "./Menu";
+import Menu from "../globalComponents/Menu";
 
-import UserContext from "../context/userContext";
+import UserContext from "../../context/userContext";
 
 export default function NewRecipePage() {
   const navigate = useNavigate();
