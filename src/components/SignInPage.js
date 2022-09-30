@@ -33,7 +33,7 @@ export default function SignInPage() {
         console.log(response.data);
         const user = JSON.stringify(response.data);
         localStorage.setItem("user", user);
-        navigate(-1);
+        navigate("/");
       })
       .catch((e) => {
         setError(e.response.data);
