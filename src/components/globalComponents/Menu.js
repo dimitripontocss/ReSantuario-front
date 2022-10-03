@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 import UserContext from "../../context/userContext";
 
@@ -27,7 +28,7 @@ export default function Menu() {
 
   return (
     <Container>
-      <Box>
+      <Box onClick={() => redirectToRandomRecipe(navigate)}>
         <p>Receita Aleatória</p>
       </Box>
       <Box>
@@ -57,6 +58,13 @@ export default function Menu() {
       )}
     </Container>
   );
+}
+
+function redirectToRandomRecipe(navigate) {
+  const promise = axios.get(process.env.REACT_APP_LINK_BACKEND + "/random");
+  promise.then((response) => {
+    navigate(`/receita/${response.data.id}`);
+  });
 }
 
 function PopUp({ isActive, setIsActive, refresh, setRefresh }) {

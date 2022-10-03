@@ -43,7 +43,7 @@ export default function SingleRecipePage() {
           setLoading(false);
         });
     }
-  }, [token]);
+  }, [token, recipeId]);
   return (
     <Container>
       <Menu />

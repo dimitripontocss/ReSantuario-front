@@ -62,6 +62,7 @@ const Query = styled.div`
   display: flex;
   align-items: flex-start;
   margin-bottom: 30px;
+  margin-left: 50px;
 
   @media (max-width: 1100px) {
     flex-direction: column;

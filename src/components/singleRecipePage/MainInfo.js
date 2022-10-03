@@ -42,7 +42,7 @@ function Ingredients({ ingredients }) {
       <h2 style={{ marginBottom: "20px" }}>Ingredientes:</h2>
       {ingredients.map((ingredient, index) => {
         return (
-          <p key={index}>
+          <p key={index} style={{ marginBottom: "10px" }}>
             {ingredient.amount} gramas de {ingredient.name}
           </p>
         );
