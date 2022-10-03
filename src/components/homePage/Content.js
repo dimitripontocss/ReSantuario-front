@@ -43,7 +43,7 @@ function RecipeBox({ recipe, index }) {
         navigate(`receita/${recipe.id}`);
       }}
     >
-      <p style={{ padding: "7px" }}>
+      <p style={{ padding: "7px", fontSize: "24px", fontWeight: "700" }}>
         {recipe.score === null ? "-" : recipe.score}⭐
       </p>
       <Infos>
