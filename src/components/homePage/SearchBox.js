@@ -74,7 +74,9 @@ function Result({ result, isSearching }) {
                 <div>
                   <h4>{recipe.title}</h4>
                   <p>
-                    Avaliação: {recipe.score === null ? "-" : recipe.score}⭐
+                    Avaliação:{" "}
+                    {recipe.score.average === null ? "-" : recipe.score.average}
+                    ⭐
                   </p>
                   <p>Dificuldade: {recipe.difficulty} ⭐</p>
                 </div>
@@ -156,13 +158,15 @@ const Container = styled.div`
 
   input {
     height: 50%;
-    width: 60%;
+    width: 100%;
 
     border-radius: 10px;
 
     font-family: "Montserrat Alternates", sans-serif;
     color: #000;
     font-size: 18px;
+
+    padding-left: 20px;
 
     border: none;
 

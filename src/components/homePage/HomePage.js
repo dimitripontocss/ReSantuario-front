@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Menu from "../globalComponents/Menu";
 import SearchBox from "./SearchBox";
 import Content from "./Content";
+import RecipesRanking from "./Ranking";
 
 export default function HomePage() {
   const [recipes, setRecipes] = useState([]);
@@ -21,10 +22,18 @@ export default function HomePage() {
     <Container>
       <Menu />
       <SearchBox></SearchBox>
-      <Content recipes={recipes} isLoading={isLoading} />
+      <Organizer>
+        <Content recipes={recipes} isLoading={isLoading} />
+        <RecipesRanking recipes={recipes} isLoading={isLoading} />
+      </Organizer>
     </Container>
   );
 }
+const Organizer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 35px;
+`;
 
 const Container = styled.div`
   margin-top: 120px;
