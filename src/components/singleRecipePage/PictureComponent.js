@@ -69,12 +69,21 @@ export default function PictureInfo({
 
 function UserInfo({ user }) {
   return (
-    <div style={{ display: "flex", width: "100%" }}>
-      <img style={{ width: "50px" }} src="" alt="" />
+    <UserBox>
+      <img style={{ width: "80px" }} src={user.profilePicture} alt="" />
       <p>criado por {user.userName}</p>
-    </div>
+    </UserBox>
   );
 }
+
+const UserBox = styled.div`
+  display: flex;
+  width: 100%;
+  img {
+    width: 80px;
+    border-radius: 50%;
+  }
+`;
 
 const PictureBox = styled.div`
   width: 80%;
