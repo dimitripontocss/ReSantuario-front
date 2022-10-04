@@ -18,26 +18,26 @@ export default function SingleRecipePage() {
   useEffect(() => {
     if (token) {
       setLoged(true);
-      const promise = axios.get(
-        process.env.REACT_APP_LINK_BACKEND + `/recipe/${recipeId}`
-      );
-      promise
-        .then((response) => {
-          setAllInfo({
-            recipeInfo: response.data.mainInfo,
-            userInfo: response.data.userInfo,
-            nutritionalTable: response.data.nutritionalTable,
-            ingredients: response.data.ingredients,
-            score: response.data.score,
-            category: response.data.category,
-          });
-          setLoading(false);
-        })
-        .catch((error) => {
-          setError(error.response.data);
-          setLoading(false);
-        });
     }
+    const promise = axios.get(
+      process.env.REACT_APP_LINK_BACKEND + `/recipe/${recipeId}`
+    );
+    promise
+      .then((response) => {
+        setAllInfo({
+          recipeInfo: response.data.mainInfo,
+          userInfo: response.data.userInfo,
+          nutritionalTable: response.data.nutritionalTable,
+          ingredients: response.data.ingredients,
+          score: response.data.score,
+          category: response.data.category,
+        });
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error.response.data);
+        setLoading(false);
+      });
   }, [token, recipeId]);
   return (
     <Container>

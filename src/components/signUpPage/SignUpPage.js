@@ -8,6 +8,7 @@ export default function SignUpPage() {
 
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [error, setError] = useState("");
@@ -16,10 +17,11 @@ export default function SignUpPage() {
   function signUp(event) {
     event.preventDefault();
     const body = {
-      email: email,
-      userName: userName,
-      password: password,
-      passwordConfirmation: passwordConfirmation,
+      email,
+      userName,
+      password,
+      passwordConfirmation,
+      profilePicture,
     };
     const promise = axios.post(
       process.env.REACT_APP_LINK_BACKEND + "/signup",
@@ -47,13 +49,19 @@ export default function SignUpPage() {
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
           ></Input>
-
           <Input
             placeholder="E-mail"
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+          ></Input>
+          <Input
+            placeholder="Url da foto de perfil"
+            type="url"
+            required
+            value={profilePicture}
+            onChange={(e) => setProfilePicture(e.target.value)}
           ></Input>
           {status === 409 ? <p>{error}</p> : <></>}
           <Input
