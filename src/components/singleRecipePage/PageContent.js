@@ -5,8 +5,7 @@ import PictureInfo from "./PictureComponent";
 import MainInfo from "./MainInfo";
 import NutritionalTable from "./NutritionalTable";
 
-export default function Page({ loading, allInfo, error, loged }) {
-  console.log(allInfo);
+export default function Page({ loading, allInfo, error, loged, token }) {
   return (
     <Content>
       {loading ? (
@@ -19,13 +18,13 @@ export default function Page({ loading, allInfo, error, loged }) {
       ) : error ? (
         <h3>{error}.</h3>
       ) : (
-        <RecipeInfo recipe={allInfo} loged={loged} />
+        <RecipeInfo recipe={allInfo} loged={loged} token={token} />
       )}
     </Content>
   );
 }
 
-function RecipeInfo({ recipe, loged }) {
+function RecipeInfo({ recipe, loged, token }) {
   return (
     <Container>
       <h3>{recipe.recipeInfo.title}</h3>
@@ -33,7 +32,9 @@ function RecipeInfo({ recipe, loged }) {
         <PictureInfo
           recipeInfo={recipe.recipeInfo}
           userInfo={recipe.userInfo}
+          score={recipe.score}
           loged={loged}
+          token={token}
         />
         <Query>
           <MainInfo
@@ -41,10 +42,19 @@ function RecipeInfo({ recipe, loged }) {
             category={recipe.category}
             ingredients={recipe.ingredients}
           />
-          <NutritionalTable
-            nutritionalTable={recipe.nutritionalTable}
-            portions={recipe.recipeInfo.portions}
-          />
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "30px",
+            }}
+          >
+            <NutritionalTable
+              nutritionalTable={recipe.nutritionalTable}
+              portions={recipe.recipeInfo.portions}
+            />
+          </div>
         </Query>
       </Infos>
     </Container>
@@ -52,20 +62,21 @@ function RecipeInfo({ recipe, loged }) {
 }
 
 const Container = styled.div`
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: space-around;
+  justify-content: center;
 `;
 
 const Query = styled.div`
   display: flex;
   align-items: flex-start;
+  width: 80%;
   margin-bottom: 30px;
-  margin-left: 50px;
-
-  @media (max-width: 1100px) {
-    flex-direction: column;
+  flex-direction: column;
+  @media (max-width: 1200px) {
+    width: 100%;
   }
 `;
 
@@ -90,4 +101,6 @@ const Infos = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
 `;

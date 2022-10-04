@@ -1,7 +1,37 @@
 import styled from "styled-components";
 import Rating from "@mui/material/Rating";
+import axios from "axios";
+import { useState, useLayoutEffect, useRef } from "react";
 
-export default function PictureInfo({ recipeInfo, userInfo, loged }) {
+export default function PictureInfo({
+  recipeInfo,
+  userInfo,
+  loged,
+  score,
+  token,
+}) {
+  const [rating, setRating] = useState(score.average);
+  const firstUpdate = useRef(true);
+  useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+    const body = {
+      score: rating,
+      recipeId: recipeInfo.id,
+    };
+    const promise = axios.post(
+      process.env.REACT_APP_LINK_BACKEND + "/score",
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    promise.then(() => console.log("foi"));
+  });
   return (
     <PictureBox>
       <img src={recipeInfo.pictureUrl} alt="" />
@@ -15,16 +45,21 @@ export default function PictureInfo({ recipeInfo, userInfo, loged }) {
         />
       </div>
       <div>
-        <p>Nota:</p>
+        <p>Avaliação:</p>
         {loged ? (
-          <Rating name="read-only" value={recipeInfo.difficulty} size="large" />
+          <div style={{ flexDirection: "column", alignItems: "flex-end" }}>
+            <Rating
+              name="simple-controlled"
+              value={rating}
+              size="large"
+              onChange={(event, newValue) => {
+                setRating(newValue);
+              }}
+            />
+            <h2>De sua opnião!</h2>
+          </div>
         ) : (
-          <Rating
-            name="read-only"
-            value={recipeInfo.difficulty}
-            size="large"
-            readOnly
-          />
+          <Rating name="read-only" value={rating} size="large" readOnly />
         )}
       </div>
       <UserInfo user={userInfo} />
@@ -42,9 +77,10 @@ function UserInfo({ user }) {
 }
 
 const PictureBox = styled.div`
-  width: 400px;
+  width: 80%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
   img {
     width: 100%;
     height: fit-content;
@@ -62,5 +98,16 @@ const PictureBox = styled.div`
     font-size: 24px;
     color: #000;
     margin-right: 10px;
+  }
+  h2 {
+    text-align: center;
+    font-family: "Montserrat Alternates", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #000;
+  }
+
+  @media (max-width: 1200px) {
+    width: 100%;
   }
 `;

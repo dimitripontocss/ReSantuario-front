@@ -47,8 +47,9 @@ const Table = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 70%;
-  height: 220px;
+  width: 40%;
+  min-width: 300px;
+  height: 210px;
 
   border: 2px solid #000;
   border-radius: 10px;

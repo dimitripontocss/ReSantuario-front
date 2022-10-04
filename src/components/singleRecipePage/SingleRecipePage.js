@@ -19,12 +19,7 @@ export default function SingleRecipePage() {
     if (token) {
       setLoged(true);
       const promise = axios.get(
-        process.env.REACT_APP_LINK_BACKEND + `/recipe/${recipeId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        process.env.REACT_APP_LINK_BACKEND + `/recipe/${recipeId}`
       );
       promise
         .then((response) => {
@@ -47,7 +42,13 @@ export default function SingleRecipePage() {
   return (
     <Container>
       <Menu />
-      <Page loading={loading} allInfo={allInfo} error={error} loged={loged} />
+      <Page
+        loading={loading}
+        allInfo={allInfo}
+        error={error}
+        loged={loged}
+        token={token}
+      />
     </Container>
   );
 }
