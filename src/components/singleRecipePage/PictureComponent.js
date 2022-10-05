@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Rating from "@mui/material/Rating";
 import axios from "axios";
-import { useState, useLayoutEffect, useRef } from "react";
+import { useState, useLayoutEffect, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function PictureInfo({
@@ -10,9 +10,25 @@ export default function PictureInfo({
   loged,
   score,
   token,
+  logedUserInfo,
 }) {
   const [rating, setRating] = useState(score.average);
+  const [isRated, setIsRated] = useState(false);
   const firstUpdate = useRef(true);
+  console.log(logedUserInfo, score);
+
+  useEffect(() => {
+    const { hasVoted, scoreGiven } = alreadyVoted(
+      score.scores,
+      logedUserInfo.userId
+    );
+    console.log(hasVoted, scoreGiven);
+    if (hasVoted) {
+      setIsRated(true);
+      setRating(scoreGiven);
+    }
+  }, [rating]);
+
   useLayoutEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
@@ -53,11 +69,13 @@ export default function PictureInfo({
               name="simple-controlled"
               value={rating}
               size="large"
+              precision={0.5}
               onChange={(event, newValue) => {
                 setRating(newValue);
+                setIsRated(true);
               }}
             />
-            <h2>De sua opnião!</h2>
+            {isRated ? <></> : <h2>De sua opnião!</h2>}
           </div>
         ) : (
           <Rating name="read-only" value={rating} size="large" readOnly />
@@ -66,6 +84,14 @@ export default function PictureInfo({
       <UserInfo user={userInfo} />
     </PictureBox>
   );
+}
+
+function alreadyVoted(votes, logedUserId) {
+  for (let i = 0; i < votes.length; i++) {
+    if (votes[i].userId === logedUserId)
+      return { hasVoted: true, scoreGiven: votes[i].score };
+  }
+  return { hasVoted: false, scoreGiven: null };
 }
 
 function UserInfo({ user }) {
@@ -101,6 +127,9 @@ const PictureBox = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 50px;
+  span {
+    z-index: 1;
+  }
   img {
     width: 100%;
     height: fit-content;

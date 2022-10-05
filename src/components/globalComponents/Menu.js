@@ -77,7 +77,6 @@ function PopUp({
   navigate,
   userInfo,
 }) {
-  console.log(userInfo);
   function leave() {
     if (window.confirm("Você quer mesmo sair?")) {
       localStorage.clear();
@@ -153,6 +152,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 2;
 
   h2 {
     font-size: 35px;

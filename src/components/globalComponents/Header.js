@@ -25,6 +25,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
 
+  z-index: 2;
+
   h2 {
     font-size: 40px;
     font-family: "Jost", sans-serif;
