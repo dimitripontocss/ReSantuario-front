@@ -12,8 +12,9 @@ export default function PictureInfo({
   token,
   logedUserInfo,
 }) {
-  const [rating, setRating] = useState(score.average);
+  const [rating, setRating] = useState(null);
   const [isRated, setIsRated] = useState(false);
+  const [voted, setVoted] = useState(false);
   const firstUpdate = useRef(true);
   console.log(logedUserInfo, score);
 
@@ -26,29 +27,33 @@ export default function PictureInfo({
     if (hasVoted) {
       setIsRated(true);
       setRating(scoreGiven);
+    } else {
+      setRating(score.average);
     }
-  }, [rating]);
+  }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
       return;
     }
-    const body = {
-      score: rating,
-      recipeId: recipeInfo.id,
-    };
-    const promise = axios.post(
-      process.env.REACT_APP_LINK_BACKEND + "/score",
-      body,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    promise.then(() => console.log("foi"));
-  });
+    if (voted) {
+      const body = {
+        score: rating,
+        recipeId: recipeInfo.id,
+      };
+      const promise = axios.post(
+        process.env.REACT_APP_LINK_BACKEND + "/score",
+        body,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      promise.then(() => setVoted(false));
+    }
+  }, [rating]);
   return (
     <PictureBox>
       <img src={recipeInfo.pictureUrl} alt="" />
@@ -69,9 +74,9 @@ export default function PictureInfo({
               name="simple-controlled"
               value={rating}
               size="large"
-              precision={0.5}
               onChange={(event, newValue) => {
                 setRating(newValue);
+                setVoted(true);
                 setIsRated(true);
               }}
             />
