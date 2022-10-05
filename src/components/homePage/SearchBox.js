@@ -169,6 +169,8 @@ const Container = styled.div`
     padding-left: 20px;
 
     border: none;
+    z-index: 1;
+    cursor: pointer;
 
     ::placeholder {
       font-family: "Montserrat Alternates", sans-serif;

@@ -17,11 +17,27 @@ export default function Content({ recipes, isLoading }) {
       ) : recipes.length === 0 ? (
         <p>Ainda não existem receitas cadastradas.</p>
       ) : (
-        <RecipesLoader recipes={recipes} />
+        <Box>
+          <p>Nosso cardápio atual</p>
+          <RecipesLoader recipes={recipes} />
+        </Box>
       )}
     </Container>
   );
 }
+
+const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  > p {
+    text-align: center;
+    font-family: "Montserrat Alternates", sans-serif;
+    color: #000;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 50px;
+  }
+`;
 
 const Container = styled.div`
   height: 100vh;

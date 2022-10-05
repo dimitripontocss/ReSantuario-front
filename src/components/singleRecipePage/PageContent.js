@@ -5,7 +5,14 @@ import PictureInfo from "./PictureComponent";
 import MainInfo from "./MainInfo";
 import NutritionalTable from "./NutritionalTable";
 
-export default function Page({ loading, allInfo, error, loged, token }) {
+export default function Page({
+  loading,
+  allInfo,
+  error,
+  loged,
+  token,
+  userInfo,
+}) {
   return (
     <Content>
       {loading ? (
@@ -18,13 +25,18 @@ export default function Page({ loading, allInfo, error, loged, token }) {
       ) : error ? (
         <h3>{error}.</h3>
       ) : (
-        <RecipeInfo recipe={allInfo} loged={loged} token={token} />
+        <RecipeInfo
+          recipe={allInfo}
+          loged={loged}
+          token={token}
+          userInfo={userInfo}
+        />
       )}
     </Content>
   );
 }
 
-function RecipeInfo({ recipe, loged, token }) {
+function RecipeInfo({ recipe, loged, token, userInfo }) {
   return (
     <Container>
       <h3>{recipe.recipeInfo.title}</h3>
@@ -35,6 +47,7 @@ function RecipeInfo({ recipe, loged, token }) {
           score={recipe.score}
           loged={loged}
           token={token}
+          logedUserInfo={userInfo}
         />
         <Query>
           <MainInfo

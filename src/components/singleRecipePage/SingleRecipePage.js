@@ -10,7 +10,7 @@ import Page from "./PageContent";
 
 export default function SingleRecipePage() {
   const { recipeId } = useParams();
-  const { token } = useContext(userContext);
+  const { token, userInfo } = useContext(userContext);
   const [loged, setLoged] = useState(false);
   const [allInfo, setAllInfo] = useState(null);
   const [error, setError] = useState(null);
@@ -48,6 +48,7 @@ export default function SingleRecipePage() {
         error={error}
         loged={loged}
         token={token}
+        userInfo={userInfo}
       />
     </Container>
   );
