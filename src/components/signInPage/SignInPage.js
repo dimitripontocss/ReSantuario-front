@@ -28,7 +28,7 @@ export default function SignInPage() {
         setToken(response.data.token);
         setUserInfo({
           userName: response.data.userName,
-          image: response.data.image,
+          userId: response.data.userId,
         });
         console.log(response.data);
         const user = JSON.stringify(response.data);

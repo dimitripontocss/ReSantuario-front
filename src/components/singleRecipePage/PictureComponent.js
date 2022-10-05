@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Rating from "@mui/material/Rating";
 import axios from "axios";
 import { useState, useLayoutEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function PictureInfo({
   recipeInfo,
@@ -68,10 +69,17 @@ export default function PictureInfo({
 }
 
 function UserInfo({ user }) {
+  const navigate = useNavigate();
   return (
     <UserBox>
       <img style={{ width: "80px" }} src={user.profilePicture} alt="" />
-      <p>criado por {user.userName}</p>
+      <p
+        onClick={() => {
+          navigate(`/usuario/${user.id}`);
+        }}
+      >
+        criado por {user.userName}
+      </p>
     </UserBox>
   );
 }
@@ -82,6 +90,9 @@ const UserBox = styled.div`
   img {
     width: 80px;
     border-radius: 50%;
+  }
+  p {
+    cursor: pointer;
   }
 `;
 

@@ -8,6 +8,7 @@ import SignUpPage from "./components/signUpPage/SignUpPage";
 import SignInPage from "./components/signInPage/SignInPage";
 import NewRecipePage from "./components/newRecipePage/NewRecipe";
 import SingleRecipePage from "./components/singleRecipePage/SingleRecipePage";
+import UserPage from "./components/userPage/UserPage";
 
 import UserContext from "./context/userContext";
 
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/login" element={<SignInPage />} />
           <Route path="/nova-receita" element={<NewRecipePage />} />
           <Route path="/receita/:recipeId" element={<SingleRecipePage />} />
+          <Route path="/usuario/:userId" element={<UserPage />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

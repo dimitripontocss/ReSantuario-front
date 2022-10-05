@@ -18,7 +18,7 @@ export default function Menu() {
       setToken(infos.token);
       setUserInfo({
         userName: infos.userName,
-        image: infos.image,
+        userId: infos.userId,
       });
       setIsLoged(true);
     } else {
@@ -47,6 +47,8 @@ export default function Menu() {
             setIsActive={setIsActive}
             refresh={refresh}
             setRefresh={setRefresh}
+            navigate={navigate}
+            userInfo={userInfo}
           />
         </>
       ) : (
@@ -67,7 +69,15 @@ function redirectToRandomRecipe(navigate) {
   });
 }
 
-function PopUp({ isActive, setIsActive, refresh, setRefresh }) {
+function PopUp({
+  isActive,
+  setIsActive,
+  refresh,
+  setRefresh,
+  navigate,
+  userInfo,
+}) {
+  console.log(userInfo);
   function leave() {
     if (window.confirm("Você quer mesmo sair?")) {
       localStorage.clear();
@@ -91,15 +101,9 @@ function PopUp({ isActive, setIsActive, refresh, setRefresh }) {
             fontWeight: "700",
           }}
         >
-          <Link to="/usuario">
-            <p
-              style={{
-                color: "#000",
-              }}
-            >
-              Minha Página
-            </p>
-          </Link>
+          <p onClick={() => navigate(`/usuario/${userInfo.userId}`)}>
+            Minha Página
+          </p>
           <p onClick={leave}>Deslogar</p>
           <p onClick={() => setIsActive(false)}>Fechar</p>
         </Box>
