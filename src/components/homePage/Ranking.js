@@ -18,7 +18,12 @@ export default function RecipesRanking({ recipes, loading }) {
 }
 
 function OrganizedRanking({ recipes }) {
-  recipes.sort((a, b) => {
+  let sendableRecipes = [];
+
+  for (const recipe of recipes) {
+    sendableRecipes.push(recipe);
+  }
+  sendableRecipes.sort((a, b) => {
     if (a.score.average < b.score.average) {
       return 1;
     }
@@ -27,7 +32,7 @@ function OrganizedRanking({ recipes }) {
     }
     return 0;
   });
-  const sendableRecipes = recipes.slice(0, 4);
+  sendableRecipes = sendableRecipes.slice(0, 4);
   return <RecipesLoader recipes={sendableRecipes} />;
 }
 
