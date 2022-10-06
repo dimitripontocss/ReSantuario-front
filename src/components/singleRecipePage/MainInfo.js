@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export default function MainInfo({ recipeInfo, category, ingredients }) {
+  const navigate = useNavigate();
   return (
     <Content>
       <div
@@ -11,7 +13,12 @@ export default function MainInfo({ recipeInfo, category, ingredients }) {
         }}
       >
         <h2 style={{ marginBottom: "0" }}>Categoria: </h2>
-        <p>{category.name}</p>
+        <p
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate(`/categoria/${category.id}`)}
+        >
+          {category.name}
+        </p>
       </div>
 
       {recipeInfo.portions === "1" ? (
