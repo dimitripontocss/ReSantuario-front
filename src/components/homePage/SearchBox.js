@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { IoIosSearch } from "react-icons/io";
 import axios from "axios";
 
 import useDebounce from "../../hooks/reactHooks";
@@ -20,18 +19,20 @@ export default function SearchBox() {
     } else {
       setIsSearching(true);
     }
-    const promise = axios.get(
-      process.env.REACT_APP_LINK_BACKEND + `/search/recipes/${search}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    promise.then((response) => {
-      console.log(response.data);
-      setResult(response.data);
-    });
+    if (isSearching) {
+      const promise = axios.get(
+        process.env.REACT_APP_LINK_BACKEND + `/search/recipes/${search}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      promise.then((response) => {
+        console.log(response.data);
+        setResult(response.data);
+      });
+    }
   }, [debouncedSearch]);
 
   return (
