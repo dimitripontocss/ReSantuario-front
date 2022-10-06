@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { BsFillTrashFill } from "react-icons/bs";
+import { BsFillTrashFill, BsFillEyeFill } from "react-icons/bs";
 import axios from "axios";
 import { useContext } from "react";
 
@@ -15,6 +15,7 @@ export default function RecipesLoader({ recipes, owner, refresh, setRefresh }) {
     });
     promise.then(() => setRefresh(refresh + 1));
   }
+
   return (
     <Recipes>
       {recipes.map((recipe, index) => (
@@ -39,11 +40,23 @@ function RecipeBox({ recipe, index, owner, deleteRecipe }) {
         </p>
         {owner ? (
           <div
-            onClick={() => {
-              console.log(recipe.id);
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginTop: "7px",
             }}
           >
-            <BsFillTrashFill />
+            <div
+              onClick={() => {
+                console.log(recipe.id);
+              }}
+            >
+              <BsFillTrashFill />
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <p>{recipe.viewCount}</p>
+              <BsFillEyeFill />
+            </div>
           </div>
         ) : (
           <></>

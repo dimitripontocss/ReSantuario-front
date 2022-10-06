@@ -20,8 +20,10 @@ export default function UserPage() {
 
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem("user"));
-    if (loggedUser.userId === +userId) setOwner(true);
-  }, []);
+    if (loggedUser) {
+      if (loggedUser.userId === +userId) setOwner(true);
+    }
+  }, [userId]);
 
   useEffect(() => {
     const promise = axios.get(
@@ -55,7 +57,7 @@ export default function UserPage() {
       ) : (
         <>
           {owner ? (
-            <MyPage />
+            <MyPage userInfo={userInfo} recipes={recipes} owner={owner} />
           ) : (
             <NotMyPage error={error} userInfo={userInfo} recipes={recipes} />
           )}
