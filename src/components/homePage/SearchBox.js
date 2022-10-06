@@ -29,7 +29,6 @@ export default function SearchBox() {
         }
       );
       promise.then((response) => {
-        console.log(response.data);
         setResult(response.data);
       });
     }

@@ -25,12 +25,6 @@ export default function NewRecipePage() {
 
   const [error, setError] = useState(undefined);
 
-  //   setTimeout(() => {
-  //     console.log(token);
-  //     if (!token) {
-  //       navigate("/login");
-  //     }
-  //   }, 2000);
   function infoValidator() {
     if (difficulty === -1) {
       setError("Selecione uma dificuldade.");
@@ -73,6 +67,7 @@ export default function NewRecipePage() {
         })
         .catch((e) => {
           setError(e.response.data);
+          if (e.response.data === "Invalid token") navigate("/login");
         });
     }
   }

@@ -30,7 +30,6 @@ export default function SignInPage() {
           userName: response.data.userName,
           userId: response.data.userId,
         });
-        console.log(response.data);
         const user = JSON.stringify(response.data);
         localStorage.setItem("user", user);
         navigate("/");

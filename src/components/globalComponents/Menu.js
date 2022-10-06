@@ -14,7 +14,6 @@ export default function Menu() {
 
   useEffect(() => {
     const infos = JSON.parse(localStorage.getItem("user"));
-    console.log(infos);
     if (infos) {
       setToken(infos.token);
       setUserInfo({
@@ -27,6 +26,11 @@ export default function Menu() {
     }
   }, [refresh]);
 
+  function goToNewRecipePage() {
+    if (isLoged) navigate("/nova-receita");
+    else navigate("/login");
+  }
+
   return (
     <Container>
       <Box onClick={() => redirectToRandomRecipe(navigate)}>
@@ -36,7 +40,7 @@ export default function Menu() {
         <p>Da Minha Geladeira</p>
       </Box>
       <Box>
-        <p onClick={() => navigate("/nova-receita")}>Adicionar Receita</p>
+        <p onClick={goToNewRecipePage}>Adicionar Receita</p>
       </Box>
       {isLoged ? (
         <>
@@ -85,6 +89,9 @@ function PopUp({
     if (window.confirm("Você quer mesmo sair?")) {
       localStorage.clear();
       window.location.reload(true);
+      setTimeout(() => {
+        navigate("/");
+      }, 500);
     }
   }
   return (
