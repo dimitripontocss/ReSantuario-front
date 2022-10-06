@@ -3,15 +3,20 @@ import Rating from "@mui/material/Rating";
 
 import RecipesLoader from "../globalComponents/RecipeLoader";
 
-export default function MyPage({ userInfo, recipes, owner }) {
+export default function MyPage({ userInfo, recipes, owner, setRefresh }) {
   return (
     <Container>
-      <UserInfoLoader recipes={recipes} userInfo={userInfo} owner={owner} />
+      <UserInfoLoader
+        recipes={recipes}
+        userInfo={userInfo}
+        owner={owner}
+        setRefresh={setRefresh}
+      />
     </Container>
   );
 }
 
-function UserInfoLoader({ recipes, userInfo, owner }) {
+function UserInfoLoader({ recipes, userInfo, owner, setRefresh }) {
   return (
     <Content>
       <MainInfo>
@@ -31,7 +36,7 @@ function UserInfoLoader({ recipes, userInfo, owner }) {
           </div>
         </Infos>
       </MainInfo>
-      <RecipesLoader recipes={recipes} owner={owner} />
+      <RecipesLoader recipes={recipes} owner={owner} setRefresh={setRefresh} />
     </Content>
   );
 }

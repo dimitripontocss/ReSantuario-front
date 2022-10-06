@@ -31,7 +31,6 @@ export default function UserPage() {
     );
     promise
       .then((response) => {
-        // console.log(response.data);
         setUserInfo({
           user: response.data.user,
           average: response.data.average,
@@ -42,7 +41,7 @@ export default function UserPage() {
       .catch(() => {
         setError("Usuário não encontrado!");
       });
-  }, [userId]);
+  }, [userId, refresh]);
 
   return (
     <Container>
@@ -57,7 +56,12 @@ export default function UserPage() {
       ) : (
         <>
           {owner ? (
-            <MyPage userInfo={userInfo} recipes={recipes} owner={owner} />
+            <MyPage
+              userInfo={userInfo}
+              recipes={recipes}
+              owner={owner}
+              setRefresh={setRefresh}
+            />
           ) : (
             <NotMyPage error={error} userInfo={userInfo} recipes={recipes} />
           )}
