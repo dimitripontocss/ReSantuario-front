@@ -14,6 +14,7 @@ export default function Menu() {
 
   useEffect(() => {
     const infos = JSON.parse(localStorage.getItem("user"));
+    console.log(infos);
     if (infos) {
       setToken(infos.token);
       setUserInfo({
@@ -83,8 +84,7 @@ function PopUp({
   function leave() {
     if (window.confirm("Você quer mesmo sair?")) {
       localStorage.clear();
-      setRefresh(refresh + 1);
-      navigate("/");
+      window.location.reload(true);
     }
   }
   return (
