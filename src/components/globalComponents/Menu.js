@@ -39,8 +39,11 @@ export default function Menu() {
       </Box>
       {isLoged ? (
         <>
-          <Box style={{ position: "relative" }}>
-            <p onClick={() => setIsActive(true)}>Olá, {userInfo.userName}</p>
+          <Box
+            onClick={() => setIsActive(true)}
+            style={{ position: "relative" }}
+          >
+            <p>Olá, {userInfo.userName}</p>
           </Box>
           <PopUp
             isActive={isActive}
@@ -81,6 +84,7 @@ function PopUp({
     if (window.confirm("Você quer mesmo sair?")) {
       localStorage.clear();
       setRefresh(refresh + 1);
+      navigate("/");
     }
   }
   return (
