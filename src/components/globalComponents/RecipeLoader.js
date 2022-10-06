@@ -5,15 +5,18 @@ import axios from "axios";
 import { useContext } from "react";
 
 import userContext from "../../context/userContext";
-export default function RecipesLoader({ recipes, owner, refresh, setRefresh }) {
+export default function RecipesLoader({ recipes, owner, setRefresh }) {
   const { token } = useContext(userContext);
   function deleteRecipe(recipeId) {
-    const promise = axios.delete(`/recipe/${recipeId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    promise.then(() => setRefresh(refresh + 1));
+    const promise = axios.delete(
+      process.env.REACT_APP_LINK_BACKEND + `/recipe/${recipeId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    promise.then(() => setRefresh((currentCount) => currentCount + 1));
   }
 
   return (
@@ -48,7 +51,7 @@ function RecipeBox({ recipe, index, owner, deleteRecipe }) {
           >
             <div
               onClick={() => {
-                console.log(recipe.id);
+                deleteRecipe(recipe.id);
               }}
             >
               <BsFillTrashFill />
