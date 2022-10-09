@@ -53,8 +53,6 @@ export default function Menu() {
           <PopUp
             isActive={isActive}
             setIsActive={setIsActive}
-            refresh={refresh}
-            setRefresh={setRefresh}
             navigate={navigate}
             userInfo={userInfo}
           />
@@ -77,14 +75,7 @@ function redirectToRandomRecipe(navigate) {
   });
 }
 
-function PopUp({
-  isActive,
-  setIsActive,
-  refresh,
-  setRefresh,
-  navigate,
-  userInfo,
-}) {
+function PopUp({ isActive, setIsActive, navigate, userInfo }) {
   function leave() {
     if (window.confirm("Você quer mesmo sair?")) {
       localStorage.clear();
@@ -129,8 +120,6 @@ const Box = styled.div`
   height: 100%;
 
   border: 3px solid #000;
-  /* border-left: 3px solid #000;
-  border-right: 3px solid #000; */
   border-radius: 10px;
 
   display: flex;
@@ -146,6 +135,10 @@ const Box = styled.div`
   &:hover {
     transform: scale(1.05);
     transition: 0.2s linear;
+  }
+  @media (max-width: 770px) {
+    min-width: 100px;
+    font-size: 18px;
   }
 `;
 

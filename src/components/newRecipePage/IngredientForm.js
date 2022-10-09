@@ -97,6 +97,11 @@ const Organizer = styled.div`
     text-align: center;
     font-size: 20px;
   }
+  @media (max-width: 700px) {
+    p {
+      font-size: 14px;
+    }
+  }
 `;
 
 const AddIngredient = styled.div`
@@ -126,6 +131,7 @@ const AddIngredient = styled.div`
   }
   button {
     margin-top: 10px;
+    min-width: 80px;
     width: 40%;
     background-color: #fa3419;
 

@@ -140,6 +140,11 @@ const Container = styled.div`
     color: #000;
     text-shadow: 1px 1px 2px #f3e1b6;
   }
+  @media (max-width: 600px) {
+    h3 {
+      font-size: 25px;
+    }
+  }
 `;
 
 const Content = styled.div`
@@ -161,6 +166,12 @@ const Content = styled.div`
       font-family: "Montserrat Alternates", sans-serif;
       color: #000;
       font-size: 14px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    p {
+      font-size: 10px;
     }
   }
 `;

@@ -96,13 +96,16 @@ const Input = styled.input`
     font-weight: 700;
     font-size: 20px;
   }
+  @media (max-width: 600px) {
+    font-size: 25px;
+    height: 20px;
+    font-size: 14px;
+  }
 `;
 
 const Button = styled.button`
-  margin-top: 20px;
-  margin-bottom: 10px;
-
   width: 20%;
+  min-width: 100px;
   height: 50px;
 
   background-color: #fa3419;
