@@ -16,7 +16,6 @@ export default function UserPage() {
   const [recipes, setRecipes] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  console.log(userId);
 
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem("user"));

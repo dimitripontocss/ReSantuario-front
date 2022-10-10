@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Rating from "@mui/material/Rating";
 import axios from "axios";
-import { useState, useLayoutEffect, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function PictureInfo({
@@ -16,14 +16,12 @@ export default function PictureInfo({
   const [isRated, setIsRated] = useState(false);
   const [voted, setVoted] = useState(false);
   const firstUpdate = useRef(true);
-  console.log(logedUserInfo, score);
 
   useEffect(() => {
     const { hasVoted, scoreGiven } = alreadyVoted(
       score.scores,
       logedUserInfo.userId
     );
-    console.log(hasVoted, scoreGiven);
     if (hasVoted) {
       setIsRated(true);
       setRating(scoreGiven);

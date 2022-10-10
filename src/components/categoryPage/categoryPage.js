@@ -4,6 +4,7 @@ import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import { useState, useEffect } from "react";
 
+import Menu from "../globalComponents/Menu";
 import RecipesLoader from "../globalComponents/RecipeLoader";
 
 export default function CategoryPage() {
@@ -33,6 +34,7 @@ export default function CategoryPage() {
   }, [categoryId]);
   return (
     <Container>
+      <Menu />
       {isLoading ? (
         <ThreeDots
           height="150"
@@ -85,7 +87,7 @@ const MainInfo = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 50px;
-  margin-top: 50px;
+  margin-top: 100px;
 
   font-family: "Montserrat Alternates", sans-serif;
   color: #000;

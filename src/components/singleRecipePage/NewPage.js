@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { ThreeDots } from "react-loader-spinner";
-import Rating from "@mui/material/Rating";
 
 export default function Page({ loading, allInfo, error, loged }) {
-  console.log(allInfo);
   return (
     <Content>
       {loading ? (
