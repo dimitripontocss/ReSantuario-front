@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# <p align = "center"> ReSantuário </p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+   <img style="width:300px" src="./public/android-chrome-512x512.png"/>
+</p>
 
-## Available Scripts
+<p align = "center">
+   <img src="https://img.shields.io/badge/author-dimitripontocss-4dae71?style=flat-square" />
+   <img src="https://img.shields.io/github/languages/count/dimitripontocss/projeto22-ReSantuario-front?color=4dae71&style=flat-square" />
+</p>
 
-In the project directory, you can run:
+## :clipboard: Description
 
-### `npm start`
+This is the repository used to create the FrontEnd of the best recipes site all over the internet. If you want to find new recipes with their macros like: Kcals, proteins, carbohydrates and lipids per portion. And a very friendly interface, for finding new recipes or to create yours. Just join us and start beeing the cook you are suposed to!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Just click the link below and start cooking!
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+https://resantuario.vercel.app/
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## :clipboard: Usefull links
 
-### `npm run build`
+If you want to use our API server alone use this link:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+https://resantuario-back.onrender.com
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+If you want to see more about our Back end fell free to visit our repository:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+https://github.com/dimitripontocss/projeto22-ReSantuario-back
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## :computer: Tecnologies used
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- JavaScript
+- React
+- CustomHooks
+- StyledComponents
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 🏁 Runnig the application
 
-## Learn More
+This project was bootstrapped with Create React App. So in order to run it at your machine you gotta have a stable version of Node.Js and NPM installed.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+First, clone this directory:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+git clone https://github.com/dimitripontocss/projeto22-ReSantuario-back
+```
 
-### Code Splitting
+After, inside the directory, run this command to install the dependencies:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+npm install
+```
 
-### Analyzing the Bundle Size
+After its done run this comand to run the server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+npm start
+```
