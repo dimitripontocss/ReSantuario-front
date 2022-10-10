@@ -47,7 +47,7 @@ This project was bootstrapped with Create React App. So in order to run it at yo
 First, clone this directory:
 
 ```
-git clone https://github.com/dimitripontocss/projeto22-ReSantuario-back
+git clone https://github.com/dimitripontocss/projeto22-ReSantuario-front
 ```
 
 After, inside the directory, run this command to install the dependencies:
