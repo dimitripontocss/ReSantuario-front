@@ -37,9 +37,6 @@ export default function Menu() {
         <p>Receita Aleatória</p>
       </Box>
       <Box>
-        <p>Da Minha Geladeira</p>
-      </Box>
-      <Box>
         <p onClick={goToNewRecipePage}>Adicionar Receita</p>
       </Box>
       {isLoged ? (
